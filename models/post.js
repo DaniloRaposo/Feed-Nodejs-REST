@@ -4,20 +4,20 @@ const postSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
     },
     content: {
       type: String,
-      require: true,
+      required: true,
     },
     imageUrl: {
       type: String,
-      require: true,
+      required: true,
     },
     creator: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      require: true,
+      required: true,
     },
   },
   { timestamps: true }
