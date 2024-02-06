@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const fs = require("fs");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -25,6 +26,14 @@ const fileFilter = (req, file, cb) => {
 
   cb(null, acceptedFileTypes.includes(file.mimetype));
 };
+
+const logStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
+  flags: "a",
+});
+
+app.use(helmet());
+app.use(compression());
+app.use(morgan("combined", { stream: logStream }));
 
 app.use(bodyParser.json());
 app.use(
